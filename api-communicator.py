@@ -2,6 +2,7 @@
 import requests
 import os.path
 import json
+from geopy.geocoders import Nominatim
 
 # cached file:
 path = 'data/'
@@ -32,6 +33,14 @@ def get_data(force_fetch=False):
 
             # extracting data in json format
             data = r.json()
+            for team in data["teams"]:
+                geolocator = Nominatim(user_agent="nhl")
+                location = geolocator.geocode(team["venue"]["city"], exactly_one=True, addressdetails=True)
+
+                print(location)
+                team["longitude"] = location.longitude
+                team["latitude"] = location.latitude
+
             with open(path+season + ".json", 'w+') as f:
                 sdata = json.dumps(data, indent=4)
                 f.write(sdata)
