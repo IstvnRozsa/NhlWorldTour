@@ -29,7 +29,7 @@ def get_data(force_fetch=False):
         url = ""
         for season in seasons:
             url = URL + season
-            r = requests.get(url = URL, params = PARAMS)
+            r = requests.get(url=url, params=PARAMS)
 
             # extracting data in json format
             data = r.json()
