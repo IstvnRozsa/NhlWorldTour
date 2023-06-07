@@ -1,12 +1,10 @@
-#!/usr/bin/env python3
-
 # importing the requests library
 import requests
 import os.path
 import json
 
 # cached file:
-path = './nhl-test.json'
+path = 'data/'
 
 # api-endpoint
 URL = "https://statsapi.web.nhl.com/api/v1/teams" + "?expand=team.stats"
@@ -34,7 +32,7 @@ def get_data(force_fetch=False):
 
             # extracting data in json format
             data = r.json()
-            with open(season + ".json", 'w+') as f:
+            with open(path+season + ".json", 'w+') as f:
                 sdata = json.dumps(data, indent=4)
                 f.write(sdata)
     return data

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+{% endblock %}
+
+
+{% block body %}
+    <div class="container-fluid">
+        <h1>Nhl</h1>
+        <svg id="1"></svg>
+    </div>
+
+
+    <script>
+        let season_2014 = {{ season_2014 | safe }};
+    </script>
+    <script src="../static/js/maps.js" type="text/javascript"></script>
+    <script src="../static/js/test.js" type="text/javascript"></script>
+
+{% endblock %}
