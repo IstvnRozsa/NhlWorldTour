@@ -3,7 +3,7 @@ import requests
 import os.path
 import json
 from geopy.geocoders import Nominatim
-
+#https://gitlab.com/dword4/nhlapi
 # cached file:
 path = 'data/'
 
@@ -29,7 +29,7 @@ def get_data(force_fetch=False):
                 print("read from file")
                 sdata = f.read()
                 data = json.loads(sdata)
-                data['year'] = season[8:]
+                data['year'] = season[8:12] + '-' + season[12:16]
                 res['seasons'].append(data)
         except:
             print("fetch from api")
@@ -38,7 +38,7 @@ def get_data(force_fetch=False):
 
             # extracting data in json format
             data = r.json()
-            data['year'] = season[8:]
+            data['year'] = season[8:12] + '-' + season[12:16]
             for team in data["teams"]:
                 team_city = team["venue"]["city"]
                 if team_city in location_cach:

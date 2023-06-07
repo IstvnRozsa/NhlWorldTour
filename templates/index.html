@@ -3,20 +3,34 @@
 {% block head %}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.12/css/bootstrap-select.min.css">
 {% endblock %}
 
 
 {% block body %}
     <div class="container-fluid">
         <h1>Nhl</h1>
+        <select id="myCombobox" class="selectpicker" multiple data-live-search="true"></select>
         <svg id="teams_map"></svg>
     </div>
 
 
     <script>
         let season_2014 = {{ season_2014 | safe }};
+        let seasons = {{ seasons | safe }};
+        console.log(seasons);
     </script>
+    <script src="../static/js/selectDataset.js" type="text/javascript"></script>
     <script src="../static/js/maps.js" type="text/javascript"></script>
     <script src="../static/js/test.js" type="text/javascript"></script>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.12/js/bootstrap-select.min.js"></script>
+
 
 {% endblock %}
