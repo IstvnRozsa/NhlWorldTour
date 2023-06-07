@@ -13,39 +13,50 @@ URL = "https://statsapi.web.nhl.com/api/v1/teams" + "?expand=team.stats"
 seasons = [
     "&season=" + str(x) + str(x+1) for x in range(2014,2021)
 ]
-print(seasons)
 # defining a params dict for the parameters to be sent to the API
 PARAMS = {}
 
 def get_data(force_fetch=False):
     # sending get request and saving the response as response object
-    try:
-        if force_fetch:
-            raise Exception
-        with open(path, 'r') as f:
-            sdata = f.read()
-            data = json.loads(sdata)
-    except:
-        url = ""
-        for season in seasons:
+    res = {"seasons": []}
+    location_cach = {}
+    for season in seasons:
+        print(season)
+        try:
+            if force_fetch:
+                raise Exception
+            with open(path+season + ".json", 'r') as f:
+                print("read from file")
+                sdata = f.read()
+                data = json.loads(sdata)
+                res['seasons'].append(data)
+        except:
+            print("fetch from api")
             url = URL + season
             r = requests.get(url=url, params=PARAMS)
 
             # extracting data in json format
             data = r.json()
             for team in data["teams"]:
-                geolocator = Nominatim(user_agent="nhl")
-                location = geolocator.geocode(team["venue"]["city"], exactly_one=True, addressdetails=True)
+                team_city = team["venue"]["city"]
+                if team_city in location_cach:
+                    location = location_cach[team_city]
+                else:
+                    geolocator = Nominatim(user_agent="nhl")
+                    location = geolocator.geocode(team_city, exactly_one=True, addressdetails=True)
+                    location_cach[team_city] = location
 
                 print(location)
                 team["longitude"] = location.longitude
                 team["latitude"] = location.latitude
 
             with open(path+season + ".json", 'w+') as f:
+                print("write season to file")
                 sdata = json.dumps(data, indent=4)
                 f.write(sdata)
-    return data
+            res['seasons'].append(data)
+    return res
 
 
 if __name__ == "__main__":
-    data = get_data(force_fetch=True)
+    data = get_data(force_fetch=False)
