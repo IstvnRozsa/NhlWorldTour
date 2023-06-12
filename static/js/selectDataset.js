@@ -1,23 +1,42 @@
-var data = [
-      { id: 1, name: "John" },
-      { id: 2, name: "Jane" },
-      { id: 3, name: "Mike" },
-      { id: 4, name: "Emily" }
-    ];
+//Default value = the first year
+selectedSeason = seasons["seasons"][0];
 
-    // Function to populate the combobox
-    function populateCombobox() {
-      var combobox = document.getElementById("myCombobox");
+// Do something with the selected value
+console.log('Selected season:', selectedSeason);
 
-      seasons["seasons"].forEach(function(item) {
-        var option = document.createElement("option");
-        option.text = item.year;
-        combobox.appendChild(option);
-      });
+// Get a reference to the combobox element
+let combobox = d3.select('#combobox');
 
-      // Refresh the combobox to reflect the changes
-      $('.selectpicker').selectpicker('refresh');
+// Populate the combobox with values from the list
+combobox.selectAll('option')
+    .data(seasons["seasons"])
+    .enter()
+    .append('option')
+    .text(function (d) {
+        return d.year;
+    });
+
+function selectSeasonByYear(objects, year) {
+    for (let i = 0; i < objects.length; i++) {
+        if (objects[i].year === year) {
+            return objects[i];
+        }
     }
+    return null; // Return null if no match found
+}
 
-    // Call the function to populate the combobox
-    populateCombobox();
+// Handle the change event of the combobox
+combobox.on('change', function () {
+    // Get the selected value
+    let selectedYear = d3.select(this).property('value');
+    selectedSeason = selectSeasonByYear(seasons["seasons"], selectedYear);
+    console.log(selectedYear, selectedSeason);
+    drawMap();
+});
+
+
+function selectTeam(team) {
+    d3.select("#selected_team")
+        .text(team);
+    console.log(team);
+}
