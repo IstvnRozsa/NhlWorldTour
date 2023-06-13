@@ -15,7 +15,7 @@ function drawMap() {
         let projection = d3.geoMercator()
             .center([-80, 45])
             .scale(300)
-            .translate([width / 2, (height - 100) /2]);
+            .translate([width / 2, (height - 100) / 2]);
 
         // Create a path generator
         const path = d3.geoPath()
@@ -41,20 +41,20 @@ function drawMap() {
                 return projection([d.longitude, d.latitude])[1];
             })
             .attr("r", 4)
-            .attr("fill", "red")
+            .attr("fill", "blue")
             .attr("id", function (d) {
                 return d.name;
             })
-            .attr("class", function (d) {
-                return d.locationName;
-            })
             .on("mouseover", function (d) {
-                // Show city name label
-                //console.log(d);
-                //console.log(d.target.id);
-                //console.log(d.target.classList[0] + " " + d.target.classList[1]);
-                selectTeam(d.target.id);
+                handleMouseOver(this.id, this);
             })
+        //.on("mouseover", function (d) {
+        // Show city name label
+        //console.log(d);
+        //console.log(d.target.id);
+        //console.log(d.target.classList[0] + " " + d.target.classList[1]);
+        //selectTeam(d.target.id);
+        //})
 
 
     });
