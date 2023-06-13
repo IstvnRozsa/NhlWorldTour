@@ -11,21 +11,30 @@
 
 {% block body %}
     <div class="container-fluid">
-        <h1>Nhl</h1>
+        <h1>NHL</h1>
         <h2 id="selected_team">Teams</h2>
         <select id="combobox" class="selectpicker"></select>
+        <select id="combobox_stats" class="selectpicker"></select>
         <svg id="teams_map"></svg>
         <svg id="chart" width="400" height="300"></svg>
+
+
+        <h2 id="line_plot_header">Line Plot</h2>
+{#        <div class="container">#}
+            <svg id="line_plot" width="400" height="300"></svg>
+{#        </div>#}
 
     </div>
 
 
     <script>
         let seasons = {{ seasons | safe }};
+        let teams = {{ teams | safe }};
     </script>
     <script src="../static/js/selectDataset.js" type="text/javascript"></script>
     <script src="../static/js/maps.js" type="text/javascript"></script>
     <script src="../static/js/barCharts.js" type="text/javascript"></script>
+    <script src="../static/js/linePlot.js" type="text/javascript"></script>
     <script src="../static/js/test.js" type="text/javascript"></script>
 
 

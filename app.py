@@ -8,8 +8,10 @@ app.config['TEMPLATES_AUTO_RELOAD'] = True
 
 @app.route('/')
 def hello_world():  # put application's code here
-    seasons = json.dumps(get_data())
-    return render_template('index.html', seasons=seasons)
+    res = get_data()
+    seasons = json.dumps(res[0])
+    teams = json.dumps(res[1])
+    return render_template('index.html', seasons=seasons, teams=teams)
 
 
 if __name__ == '__main__':
