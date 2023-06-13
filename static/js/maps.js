@@ -43,7 +43,7 @@ function drawMap() {
             .attr("r", 4)
             .attr("fill", "blue")
             .attr("id", function (d) {
-                return d.name;
+                return "i" + d.id;
             })
             .on("mouseover", function (d) {
                 handleMouseOver(this.id, this);

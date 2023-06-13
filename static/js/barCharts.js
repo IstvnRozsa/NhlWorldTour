@@ -45,7 +45,7 @@ function drawBarchart() {
         .append("rect")
         .attr("class", "bar")
         .attr("fill", "blue")
-        .attr("id", d => d.name)
+        .attr("id", d => "i" + d.id)
         .attr("x", d => xScale(d.name))
         .attr("y", d => yScale(d["teamStats"][0]["splits"][0]["stat"]["powerPlayGoals"]))
         .attr("width", xScale.bandwidth())

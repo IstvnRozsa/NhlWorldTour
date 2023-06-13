@@ -56,39 +56,19 @@ function selectTeam(team) {
 
 }
 
-function handleMouseOver(name, element) {
-    let circleID = "circle#" + name;
-    let rectID = "rect#" + name + ".bar";
-    // if (element.tagName === "rect") {
-    //     d3.selectAll(".bar").attr("fill", "blue");
-    //     d3.select(element).attr("fill", "red");
-    //     console.log("rect");
-    //     // d3.selectAll(".bar").attr("fill", "blue");
-    // } else if (element.tagName === "circle") {
-    //     console.log("Circle");
-    //     d3.selectAll("circle").style("fill", "blue").attr("r", 4);
-    //     d3.select(element).attr("r", 10).style("fill", "red");
-    //
-    // }
-    console.log("rect");
-    console.log(rectID);
-    d3.selectAll(".bar").attr("fill", "blue");
-    d3.select(element.id).attr("fill", "red");
+function handleMouseOver(id, element) {
+    let svg_map = d3.select("#teams_map");
+    let svg_chart = d3.select("#chart");
+
+    let circleID = "circle#" + id;
+    let rectID = "rect#" + id + ".bar";
     console.log("Circle");
-    console.log(circleID);
-    console.log(element.id);
-    d3.selectAll("circle").style("fill", "blue").attr("r", 4);
-    d3.select(circleID).attr("r", 10).style("fill", "red");
+    svg_map.selectAll("circle").style("fill", "green").attr("r", 4);
+    svg_map.select(circleID).attr("r", 10).style("fill", "red");
 
-    // d3.selectAll(".bar").attr("fill", "blue");
-    // d3.select(element).attr("fill", "red");
-    // console.log(name);
-
-
-    // var svg = d3.select("#chart")
-    // svg.selectAll(".bar").attr("fill", "blue");
-    // svg.select("rect.bar#"+name).attr("fill", "red");
-    // console.log(name);
+    console.log("rect");
+    svg_chart.selectAll(".bar").attr("fill", "blue");
+    svg_chart.select(rectID).attr("fill", "red");
 }
 
 function handleMouseOut() {
