@@ -1,10 +1,13 @@
 function drawMap() {
+    let svgToRemove = d3.select("#teams_map").select("svg");
+    svgToRemove.remove();
 
 // Set the width and height of the SVG container
-    const width = 800;
-    const height = 600;
+    const width = 500;
+    const height = 300;
 // Create an SVG container
     const svg = d3.select("#teams_map")
+        .append("svg")
         .attr("width", width)
         .attr("height", height);
 
@@ -43,10 +46,10 @@ function drawMap() {
             .attr("r", 4)
             .attr("fill", "blue")
             .attr("id", function (d) {
-                return "i" + d.id;
+                return d.abbreviation;
             })
             .on("mouseover", function (d) {
-                handleMouseOver(this.id, this);
+                handleMouseOver(this.id);
             })
         //.on("mouseover", function (d) {
         // Show city name label

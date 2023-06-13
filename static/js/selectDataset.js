@@ -36,42 +36,36 @@ combobox.on('change', function () {
     console.log(selectedYear, selectedSeason);
     drawMap();
     drawBarchart();
+    drawBarchart2();
 });
 
 var previousTeam = "Winnipeg Jets";
 
-function selectTeam(team) {
-    d3.select("#selected_team")
-        .text(team);
-    //change the selected points to red
-    console.log("circle#" + team);
-    var circles = d3.selectAll("circle");
-    circles.style("fill", "blue").attr("r", 4);
-    let selectedCircle = circles.filter(function (d) {
-        return d3.select(this).attr("id") === team;
+
+function handleMouseOver(id) {
+    console.log(id);
+    console.log(selectedSeason);
+    var selectedTeam = selectedSeason["teams"].find(function (obj) {
+        return obj.abbreviation === id;
     });
-    selectedCircle.style("fill", "red").attr("r", 10);
 
-    //change the selected bars to red
-    var bar = d3.select("#chart");
-    bar.selectAll("#" + team).style("fill", "red");
-    console.log(bar);
+    d3.select("#selected_team").text(selectedTeam.name);
 
-}
-
-function handleMouseOver(id, element) {
     let svg_map = d3.select("#teams_map");
-    let svg_chart = d3.select("#chart");
+    let svg_ppg_chart = d3.select("#pp_goals_chart");
+    let svg_gpg_chart = d3.select("#goals_p_game_chart");
 
     let circleID = "circle#" + id;
-    let rectID = "rect#" + id + ".bar";
-    console.log("Circle");
-    svg_map.selectAll("circle").style("fill", "green").attr("r", 4);
+    let rectID = "rect#" + id;
+
+    svg_map.selectAll("circle").style("fill", "blue").attr("r", 4);
     svg_map.select(circleID).attr("r", 10).style("fill", "red");
 
-    console.log("rect");
-    svg_chart.selectAll(".bar").attr("fill", "blue");
-    svg_chart.select(rectID).attr("fill", "red");
+    svg_ppg_chart.selectAll(".bar").attr("fill", "blue");
+    svg_ppg_chart.select(rectID).attr("fill", "red");
+
+    svg_gpg_chart.selectAll(".bar").attr("fill", "blue");
+    svg_gpg_chart.select(rectID).attr("fill", "red");
 }
 
 function handleMouseOut() {

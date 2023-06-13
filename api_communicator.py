@@ -26,7 +26,7 @@ def get_data(force_fetch=False):
             if force_fetch:
                 raise Exception
             with open(path+season + ".json", 'r') as f:
-                print("read from file")
+                print(f"read from file {f}")
                 sdata = f.read()
                 data = json.loads(sdata)
                 data['year'] = season[8:12] + '-' + season[12:16]
