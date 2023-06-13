@@ -19,6 +19,7 @@ PARAMS = {}
 def get_data(force_fetch=False):
     # sending get request and saving the response as response object
     res = {"seasons": []}
+    teams = []
     location_cach = {}
     for season in seasons:
         print(season)
@@ -26,10 +27,17 @@ def get_data(force_fetch=False):
             if force_fetch:
                 raise Exception
             with open(path+season + ".json", 'r') as f:
-                print("read from file")
+                print(f"read from file {f}")
                 sdata = f.read()
                 data = json.loads(sdata)
                 data['year'] = season[8:12] + '-' + season[12:16]
+                teams = data['teams']
+                year = data['year']
+                for item in teams:
+                    item.update({"year": year})
+                # for t in teams:
+                #     t['year'] = data['year']
+                #     teams.append(t)
                 res['seasons'].append(data)
         except:
             print("fetch from api")
@@ -57,6 +65,10 @@ def get_data(force_fetch=False):
                 sdata = json.dumps(data, indent=4)
                 f.write(sdata)
             res['seasons'].append(data)
+    with open(path+"teams.json", 'w+') as f:
+        print("write teams")
+        sdata = json.dumps(teams)
+        f.write(sdata)
     return res
 
 
