@@ -39,15 +39,20 @@ combobox.on('change', function () {
     drawBarchart2();
 });
 
-var previousTeam = "Winnipeg Jets";
+var previousTeamId = "NJD";
+var previousTeam = selectedSeason["teams"].find(function (obj) {
+        return obj.abbreviation === previousTeamId;
+    });
+
+console.log(previousTeam);
 
 
 function handleMouseOver(id) {
-    console.log(id);
-    console.log(selectedSeason);
     var selectedTeam = selectedSeason["teams"].find(function (obj) {
         return obj.abbreviation === id;
     });
+    previousTeam = selectedTeam;
+    console.log(previousTeam);
 
     d3.select("#selected_team").text(selectedTeam.name);
 

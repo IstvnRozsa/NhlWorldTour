@@ -10,7 +10,7 @@ function drawBarchart() {
 // Set the dimensions and margins of the chart
     let width = 500;
     let height = 300;
-    let margin = {top: 10, right: 0, bottom: 30, left: 40};
+    let margin = {top: 20, right: 0, bottom: 30, left: 40};
 
 // Calculate the inner width and height
     let innerWidth = width - margin.left - margin.right;
@@ -68,7 +68,9 @@ function drawBarchart() {
 // Create the x-axis
     chart.append("g")
         .attr("transform", `translate(0,${innerHeight})`)
-        .call(d3.axisBottom(xScale));
+        .call(d3.axisBottom(xScale))
+        .selectAll("text")
+        .attr("transform", "rotate(-7)");
 
 // Create the y-axis
     chart.append("g")
@@ -88,7 +90,7 @@ function drawBarchart2() {
 // Set the dimensions and margins of the chart
     let width = 500;
     let height = 300;
-    let margin = {top: 10, right: 0, bottom: 30, left: 40};
+    let margin = {top: 20, right: 10, bottom: 30, left: 40};
 
 // Calculate the inner width and height
     let innerWidth = width - margin.left - margin.right;
@@ -146,7 +148,9 @@ function drawBarchart2() {
 // Create the x-axis
     chart.append("g")
         .attr("transform", `translate(0,${innerHeight})`)
-        .call(d3.axisBottom(xScale));
+        .call(d3.axisBottom(xScale))
+        .selectAll("text")
+        .attr("transform", "rotate(-7)");
 
 // Create the y-axis
     chart.append("g")
