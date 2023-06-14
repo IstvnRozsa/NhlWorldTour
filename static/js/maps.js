@@ -52,7 +52,6 @@ function drawMap() {
                 handleMouseOver(this.id);
             })
     });
-    console.log("Draw Map");
 }
 
 drawMap();

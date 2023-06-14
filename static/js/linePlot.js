@@ -22,10 +22,17 @@ function updateLinePlot(data, feature = "powerPlayGoals", selected = "#line_plot
     // Initialise X axis:
     const x = d3.scaleLinear().range([0, width]);
 
-    var customTickFormat = function (d) {
-        var dataPoint = data[0].find(function (item) {
+    let customTickFormat = function (d) {
+        let team = null;
+        if (team1.length > team2.length) {
+            team = team1;
+        } else {
+            team = team2;
+        }
+        let dataPoint = team.find(function (item) {
             return item.from === d;
         });
+
         if (dataPoint) {
             return dataPoint.from + "-" + dataPoint.to;
         }

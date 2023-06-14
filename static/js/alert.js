@@ -8,6 +8,5 @@ var message =
     -pts: ${previousTeam["teamStats"][0]["splits"][0]["stat"]["pts"]}`;
 
 d3.select("#myButton").on("click", function () {
-    console.log(previousTeam);
     alert(message);
 });

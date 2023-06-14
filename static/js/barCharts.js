@@ -52,7 +52,6 @@ function drawBarchart() {
         .on("mouseover", function (d) {
             handleMouseOver(this.id)
         })
-        .on("mouseout", handleMouseOut);
 
     chart.selectAll(".bar-label")
         .data(selectedSeason["teams"].slice(0, 5))
@@ -75,7 +74,6 @@ function drawBarchart() {
 // Create the y-axis
     chart.append("g")
         .call(d3.axisLeft(yScale));
-    console.log("Draw barchart");
 }
 
 function drawBarchart2() {
@@ -132,7 +130,6 @@ function drawBarchart2() {
         .on("mouseover", function (d) {
             handleMouseOver(this.id)
         })
-        .on("mouseout", handleMouseOut);
 
     chart.selectAll(".bar-label")
         .data(selectedSeason["teams"].slice(0, 5))
@@ -155,7 +152,6 @@ function drawBarchart2() {
 // Create the y-axis
     chart.append("g")
         .call(d3.axisLeft(yScale));
-    console.log("Draw barchart");
 }
 
 drawBarchart();

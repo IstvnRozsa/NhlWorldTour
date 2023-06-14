@@ -1,9 +1,6 @@
 //Default value = the first year
 selectedSeason = seasons["seasons"][0];
 
-// Do something with the selected value
-console.log('Selected season:', selectedSeason);
-
 // Get a reference to the combobox element
 let combobox = d3.select('#combobox');
 
@@ -41,8 +38,6 @@ var previousTeam = selectedSeason["teams"].find(function (obj) {
     return obj.abbreviation === previousTeamId;
 });
 
-console.log(previousTeam);
-
 function handleMouseOver(id) {
     var selectedTeam = selectedSeason["teams"].find(function (obj) {
         return obj.abbreviation === id;
@@ -73,8 +68,4 @@ function handleMouseOver(id) {
     updateLinePlot(selectTeamData(), "powerPlayPercentage", "#line_plot_percentage");
     updateLinePlot(selectTeamData(), "powerPlayGoalsAgainst", "#line_plot_against");
     updateLinePlot(selectTeamData(), "powerPlayOpportunities", "#line_plot_opportunities");
-}
-
-function handleMouseOut() {
-    console.log("Mouse Out")
 }
