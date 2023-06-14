@@ -59,21 +59,31 @@ function updateLinePlot(data, feature = "powerPlayGoals", selected = "#line_plot
     // Create the X axis:
 
 
-    x.domain([d3.min(team1, function (d) {
+    x1_min = d3.min(team1, function (d) {
         return d["from"];
-    }), d3.max(team1, function (d) {
+    });
+    x2_min = d3.min(team2, function (d) {
         return d["from"];
-    })]);
+    });
+    x1_max = d3.max(team1, function (d) {
+        return d["from"];
+    });
+    x2_max = d3.max(team2, function (d) {
+        return d["from"];
+    });
+    x.domain([d3.min([x1_min, x2_min]), d3.max([x1_max, x2_max])]);
     linePlotSvg.selectAll(".myXaxis").transition()
         .duration(500)
         .call(xAxis);
 
     // create the Y axis
-    y.domain([d3.min(team1, function (d) {
-        return 0;
-    }), d3.max(team1, function (d) {
+    y1_max = d3.max(team1, function (d) {
         return d.teamStats[0].splits[0].stat[feature];
-    })]);
+    });
+    y2_max = d3.max(team2, function (d) {
+        return d.teamStats[0].splits[0].stat[feature];
+    });
+    y.domain([0, d3.max([y1_max, y2_max])]);
     linePlotSvg.selectAll(".myYaxis")
         .transition()
         .duration(500)
@@ -129,7 +139,7 @@ function updateLinePlot(data, feature = "powerPlayGoals", selected = "#line_plot
 
 // At the beginning, I run the update function on the first dataset:
 
-    updateLinePlot(selectTeamData());
-    updateLinePlot(selectTeamData(), "powerPlayPercentage", "#line_plot_percentage");
-    updateLinePlot(selectTeamData(), "powerPlayGoalsAgainst", "#line_plot_against");
-    updateLinePlot(selectTeamData(), "powerPlayOpportunities", "#line_plot_opportunities");
+updateLinePlot(selectTeamData());
+updateLinePlot(selectTeamData(), "powerPlayPercentage", "#line_plot_percentage");
+updateLinePlot(selectTeamData(), "powerPlayGoalsAgainst", "#line_plot_against");
+updateLinePlot(selectTeamData(), "powerPlayOpportunities", "#line_plot_opportunities");

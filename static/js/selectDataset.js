@@ -1,6 +1,5 @@
 //Default value = the first year
 selectedSeason = seasons["seasons"][0];
-statistics = Object.keys(selectedSeason.teams[0].teamStats[0].splits[0].stat);
 
 // Do something with the selected value
 console.log('Selected season:', selectedSeason);
