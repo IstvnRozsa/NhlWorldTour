@@ -7,7 +7,7 @@ app.config['TEMPLATES_AUTO_RELOAD'] = True
 
 
 @app.route('/')
-def hello_world():  # put application's code here
+def execute():  # put application's code here
     res = get_data()
     seasons = json.dumps(res[0])
     teamsStatistics = json.dumps(res[1])

@@ -51,15 +51,6 @@ function drawMap() {
             .on("mouseover", function (d) {
                 handleMouseOver(this.id);
             })
-        //.on("mouseover", function (d) {
-        // Show city name label
-        //console.log(d);
-        //console.log(d.target.id);
-        //console.log(d.target.classList[0] + " " + d.target.classList[1]);
-        //selectTeam(d.target.id);
-        //})
-
-
     });
     console.log("Draw Map");
 }

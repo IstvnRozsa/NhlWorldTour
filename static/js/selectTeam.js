@@ -8,8 +8,6 @@ combobox_teams.selectAll('option')
         return d['name'];
     });
 
-
-
 let previousSelectedTeamFromCB = "New Jersey Devils";
 
 function selectTeamData() {
@@ -23,9 +21,6 @@ function selectTeamData() {
         }
 
     }
-    console.log(previousTeamId);
-    console.log(dataTeam1);
-    console.log(dataTeam2);
     return [dataTeam1, dataTeam2];
     // return null; // Return null if no match found
 }
@@ -33,11 +28,8 @@ function selectTeamData() {
 combobox_teams.on('change', function () {
     // Get the selected value
     previousSelectedTeamFromCB = d3.select(this).property('value');
-    console.log("XXX: ");
-    console.log(teams);
     let selectedTeams = selectTeamData();
-    console.log("stats" + previousSelectedTeamFromCB + ": " + selectedTeams[0]);
-    console.log(selectedTeams[0])
+
     updateLinePlot(selectedTeams);
     updateLinePlot(selectedTeams, "powerPlayPercentage", "#line_plot_percentage");
     updateLinePlot(selectedTeams, "powerPlayGoalsAgainst", "#line_plot_against");

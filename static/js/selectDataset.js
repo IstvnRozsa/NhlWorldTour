@@ -30,7 +30,6 @@ combobox.on('change', function () {
     // Get the selected value
     let selectedYear = d3.select(this).property('value');
     selectedSeason = selectSeasonByYear(seasons["seasons"], selectedYear);
-    console.log(selectedYear, selectedSeason);
     drawMap();
     drawBarchart();
     drawBarchart2();
@@ -50,7 +49,6 @@ function handleMouseOver(id) {
     });
     previousTeam = selectedTeam;
     previousTeamId = id;
-    console.log(previousTeam);
 
     d3.select("#selected_team").text(selectedTeam.name);
 

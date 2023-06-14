@@ -3,12 +3,11 @@ function updateLinePlot(data, feature = "powerPlayGoals", selected = "#line_plot
     if (data == null) {
         return;
     }
-    console.log("draw LinePlot");
-    team1 = data[0];
-    team2 = data[1];
-    margin = {top: 20, right: 20, bottom: 60, left: 60};
-    width = 400 - margin.left - margin.right;
-    height = 400 - margin.top - margin.bottom;
+    let team1 = data[0];
+    let team2 = data[1];
+    let margin = {top: 20, right: 20, bottom: 60, left: 60};
+    let width = 400 - margin.left - margin.right;
+    let height = 400 - margin.top - margin.bottom;
 
     let svgToRemove = d3.select(selected).select("svg");
     svgToRemove.remove();
@@ -23,7 +22,6 @@ function updateLinePlot(data, feature = "powerPlayGoals", selected = "#line_plot
     // Initialise X axis:
     const x = d3.scaleLinear().range([0, width]);
 
-
     var customTickFormat = function (d) {
         var dataPoint = data[0].find(function (item) {
             return item.from === d;
@@ -34,14 +32,9 @@ function updateLinePlot(data, feature = "powerPlayGoals", selected = "#line_plot
         return "";
     };
 
-
     const xAxis = d3.axisBottom()
         .scale(x)
         .ticks(7)
-        .tickFormat(function (d) {
-            var formatter = d3.format("d");
-            return formatter(d);
-        })
         .tickFormat(customTickFormat);
 
 
@@ -57,8 +50,6 @@ function updateLinePlot(data, feature = "powerPlayGoals", selected = "#line_plot
         .attr("class", "myYaxis")
 
     // Create the X axis:
-
-
     x1_min = d3.min(team1, function (d) {
         return d["from"];
     });
@@ -138,7 +129,6 @@ function updateLinePlot(data, feature = "powerPlayGoals", selected = "#line_plot
 }
 
 // At the beginning, I run the update function on the first dataset:
-
 updateLinePlot(selectTeamData());
 updateLinePlot(selectTeamData(), "powerPlayPercentage", "#line_plot_percentage");
 updateLinePlot(selectTeamData(), "powerPlayGoalsAgainst", "#line_plot_against");
