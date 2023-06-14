@@ -10,7 +10,7 @@ combobox_teams.selectAll('option')
 
 
 
-let previousSelectedTeamFromCB = null;
+let previousSelectedTeamFromCB = "New Jersey Devils";
 
 function selectTeamData() {
     let dataTeam1 = [];

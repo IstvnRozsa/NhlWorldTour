@@ -7,7 +7,7 @@ function updateLinePlot(data, feature = "powerPlayGoals", selected = "#line_plot
     team1 = data[0];
     team2 = data[1];
     margin = {top: 20, right: 20, bottom: 60, left: 60};
-    width = 1000 - margin.left - margin.right;
+    width = 400 - margin.left - margin.right;
     height = 400 - margin.top - margin.bottom;
 
     let svgToRemove = d3.select(selected).select("svg");
@@ -22,10 +22,29 @@ function updateLinePlot(data, feature = "powerPlayGoals", selected = "#line_plot
 
     // Initialise X axis:
     const x = d3.scaleLinear().range([0, width]);
-    const xAxis = d3.axisBottom().scale(x).ticks(7).tickFormat(function (d) {
-        var formatter = d3.format("d");
-        return formatter(d);
-    });
+
+
+    var customTickFormat = function (d) {
+        var dataPoint = data[0].find(function (item) {
+            return item.from === d;
+        });
+        if (dataPoint) {
+            return dataPoint.from + "-" + dataPoint.to;
+        }
+        return "";
+    };
+
+
+    const xAxis = d3.axisBottom()
+        .scale(x)
+        .ticks(7)
+        .tickFormat(function (d) {
+            var formatter = d3.format("d");
+            return formatter(d);
+        })
+        .tickFormat(customTickFormat);
+
+
     linePlotSvg.append("g")
         .attr("transform", `translate(0, ${height})`)
         .attr("class", "myXaxis")
@@ -109,4 +128,8 @@ function updateLinePlot(data, feature = "powerPlayGoals", selected = "#line_plot
 }
 
 // At the beginning, I run the update function on the first dataset:
-updateLinePlot(null);
+
+    updateLinePlot(selectTeamData());
+    updateLinePlot(selectTeamData(), "powerPlayPercentage", "#line_plot_percentage");
+    updateLinePlot(selectTeamData(), "powerPlayGoalsAgainst", "#line_plot_against");
+    updateLinePlot(selectTeamData(), "powerPlayOpportunities", "#line_plot_opportunities");
