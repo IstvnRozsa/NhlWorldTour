@@ -5,7 +5,7 @@ function updateLinePlot(data, feature = "powerPlayGoals", selected = "#line_plot
     }
     let team1 = data[0];
     let team2 = data[1];
-    let margin = {top: 20, right: 20, bottom: 60, left: 60};
+    let margin = {top: 20, right: 30, bottom: 60, left: 60};
     let width = 400 - margin.left - margin.right;
     let height = 400 - margin.top - margin.bottom;
 
@@ -42,7 +42,7 @@ function updateLinePlot(data, feature = "powerPlayGoals", selected = "#line_plot
     const xAxis = d3.axisBottom()
         .scale(x)
         .ticks(7)
-        .tickFormat(customTickFormat);
+        .tickFormat(customTickFormat)
 
 
     linePlotSvg.append("g")
@@ -73,6 +73,9 @@ function updateLinePlot(data, feature = "powerPlayGoals", selected = "#line_plot
     linePlotSvg.selectAll(".myXaxis").transition()
         .duration(500)
         .call(xAxis);
+
+    linePlotSvg.selectAll("text")
+        .attr("transform", "rotate(-7)");
 
     // create the Y axis
     y1_max = d3.max(team1, function (d) {
