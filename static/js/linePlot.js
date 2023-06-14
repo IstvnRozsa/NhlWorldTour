@@ -1,17 +1,14 @@
-
 // Create a function that takes a dataset as input and update the plot:
 function updateLinePlot(data) {
     if (data == null) {
         return;
     }
+    console.log("draw LinePlot");
     team1 = data[0];
     team2 = data[1];
-    console.log("data for linePlot are: ");
-    console.log(team1);
     margin = {top: 20, right: 20, bottom: 60, left: 60};
     width = 1000 - margin.left - margin.right;
     height = 400 - margin.top - margin.bottom;
-    console.log("draw LinePlot");
 
     let svgToRemove = d3.select("#line_plot").select("svg");
     svgToRemove.remove();
@@ -25,10 +22,14 @@ function updateLinePlot(data) {
 
     // Initialise X axis:
     const x = d3.scaleLinear().range([0, width]);
-    const xAxis = d3.axisBottom().scale(x);
+    const xAxis = d3.axisBottom().scale(x).ticks(7).tickFormat(function (d) {
+        var formatter = d3.format("d");
+        return formatter(d);
+    });
     linePlotSvg.append("g")
         .attr("transform", `translate(0, ${height})`)
         .attr("class", "myXaxis")
+        .attr("ticks", '7')
 
     // Initialize Y axis
     const y = d3.scaleLinear().range([height, 0]);
@@ -105,9 +106,6 @@ function updateLinePlot(data) {
         .attr("fill", "none")
         .attr("stroke", "green")
         .attr("stroke-width", 2.5)
-
-
-
 }
 
 // At the beginning, I run the update function on the first dataset:
