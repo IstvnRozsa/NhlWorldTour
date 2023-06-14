@@ -1,5 +1,5 @@
 // Create a function that takes a dataset as input and update the plot:
-function updateLinePlot(data) {
+function updateLinePlot(data, feature = "powerPlayGoals", selected = "#line_plot_goals") {
     if (data == null) {
         return;
     }
@@ -10,10 +10,10 @@ function updateLinePlot(data) {
     width = 1000 - margin.left - margin.right;
     height = 400 - margin.top - margin.bottom;
 
-    let svgToRemove = d3.select("#line_plot").select("svg");
+    let svgToRemove = d3.select(selected).select("svg");
     svgToRemove.remove();
 
-    let linePlotSvg = d3.select("#line_plot")
+    let linePlotSvg = d3.select(selected)
         .append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
@@ -53,7 +53,7 @@ function updateLinePlot(data) {
     y.domain([d3.min(team1, function (d) {
         return 0;
     }), d3.max(team1, function (d) {
-        return d.teamStats[0].splits[0].stat["powerPlayGoals"];
+        return d.teamStats[0].splits[0].stat[feature];
     })]);
     linePlotSvg.selectAll(".myYaxis")
         .transition()
@@ -77,7 +77,7 @@ function updateLinePlot(data) {
                 return x(d["from"]);
             })
             .y(function (d) {
-                return y(d.teamStats[0].splits[0].stat["powerPlayGoals"]);
+                return y(d.teamStats[0].splits[0].stat[feature]);
             }))
         .attr("fill", "none")
         .attr("stroke", "red")
@@ -101,7 +101,7 @@ function updateLinePlot(data) {
                 return x(d["from"]);
             })
             .y(function (d) {
-                return y(d.teamStats[0].splits[0].stat["powerPlayGoals"]);
+                return y(d.teamStats[0].splits[0].stat[feature]);
             }))
         .attr("fill", "none")
         .attr("stroke", "green")

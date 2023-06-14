@@ -39,4 +39,7 @@ combobox_teams.on('change', function () {
     console.log("stats" + previousSelectedTeamFromCB + ": " + selectedTeams[0]);
     console.log(selectedTeams[0])
     updateLinePlot(selectedTeams);
+    updateLinePlot(selectedTeams, "powerPlayPercentage", "#line_plot_percentage");
+    updateLinePlot(selectedTeams, "powerPlayGoalsAgainst", "#line_plot_against");
+    updateLinePlot(selectedTeams, "powerPlayOpportunities", "#line_plot_opportunities");
 });

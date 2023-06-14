@@ -72,6 +72,9 @@ function handleMouseOver(id) {
     svg_gpg_chart.select(rectID).attr("fill", "red");
 
     updateLinePlot(selectTeamData());
+    updateLinePlot(selectTeamData(), "powerPlayPercentage", "#line_plot_percentage");
+    updateLinePlot(selectTeamData(), "powerPlayGoalsAgainst", "#line_plot_against");
+    updateLinePlot(selectTeamData(), "powerPlayOpportunities", "#line_plot_opportunities");
 }
 
 function handleMouseOut() {
