@@ -125,6 +125,7 @@ function updateLinePlot(data, feature = "powerPlayGoals", selected = "#line_plot
             }))
         .attr("fill", "none")
         .attr("stroke", "green")
+        .style("stroke-dasharray", ("3, 3"))
         .attr("stroke-width", 2.5)
 }
 
