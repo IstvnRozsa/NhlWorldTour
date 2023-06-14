@@ -70,6 +70,8 @@ function handleMouseOver(id) {
 
     svg_gpg_chart.selectAll(".bar").attr("fill", "blue");
     svg_gpg_chart.select(rectID).attr("fill", "red");
+
+    updateLinePlot(selectTeamData());
 }
 
 function handleMouseOut() {

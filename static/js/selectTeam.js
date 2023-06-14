@@ -8,17 +8,20 @@ combobox_teams.selectAll('option')
         return d['name'];
     });
 
-function selectTeamData(objects, name) {
+
+
+let previousSelectedTeamFromCB = null;
+
+function selectTeamData() {
     let dataTeam1 = [];
     let dataTeam2 = [];
-    for (let i = 0; i < objects.length; i++) {
-        if (objects[i].name === name) {
-            console.log("obj: ");
-            console.log(objects[i]);
-            dataTeam2.push(objects[i]);
-        } else if (objects[i].abbreviation === previousTeamId) {
-            dataTeam1.push(objects[i]);
+    for (let i = 0; i < teams.length; i++) {
+        if (teams[i].name === previousSelectedTeamFromCB) {
+            dataTeam2.push(teams[i]);
+        } else if (teams[i].abbreviation === previousTeamId) {
+            dataTeam1.push(teams[i]);
         }
+
     }
     console.log(previousTeamId);
     console.log(dataTeam1);
@@ -29,11 +32,11 @@ function selectTeamData(objects, name) {
 
 combobox_teams.on('change', function () {
     // Get the selected value
-    let selected = d3.select(this).property('value');
+    previousSelectedTeamFromCB = d3.select(this).property('value');
     console.log("XXX: ");
     console.log(teams);
-    let selectedTeams = selectTeamData(teams, selected);
-    console.log("stats" + selected + ": " + selectedTeams[0]);
+    let selectedTeams = selectTeamData();
+    console.log("stats" + previousSelectedTeamFromCB + ": " + selectedTeams[0]);
     console.log(selectedTeams[0])
     updateLinePlot(selectedTeams);
 });

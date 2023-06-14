@@ -1,6 +1,3 @@
-function drawLineChart() {
-    updateLinePlot(teams);
-}
 
 // Create a function that takes a dataset as input and update the plot:
 function updateLinePlot(data) {
@@ -12,11 +9,15 @@ function updateLinePlot(data) {
     console.log("data for linePlot are: ");
     console.log(team1);
     margin = {top: 20, right: 20, bottom: 60, left: 60};
-    width = 500 - margin.left - margin.right;
+    width = 1000 - margin.left - margin.right;
     height = 400 - margin.top - margin.bottom;
     console.log("draw LinePlot");
 
-    linePlotSvg = d3.select("#line_plot")
+    let svgToRemove = d3.select("#line_plot").select("svg");
+    svgToRemove.remove();
+
+    let linePlotSvg = d3.select("#line_plot")
+        .append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
@@ -78,8 +79,35 @@ function updateLinePlot(data) {
                 return y(d.teamStats[0].splits[0].stat["powerPlayGoals"]);
             }))
         .attr("fill", "none")
-        .attr("stroke", "steelblue")
+        .attr("stroke", "red")
         .attr("stroke-width", 2.5)
+
+
+    // Create an update selection: bind to the new data
+    const u2 = linePlotSvg.selectAll(".lineTest2")
+        .data([team2], function (d) {
+            return d["from"];
+        });
+
+    // Updata the line
+    u2
+        .join("path")
+        .attr("class", "lineTest2")
+        .transition()
+        .duration(3000)
+        .attr("d", d3.line()
+            .x(function (d) {
+                return x(d["from"]);
+            })
+            .y(function (d) {
+                return y(d.teamStats[0].splits[0].stat["powerPlayGoals"]);
+            }))
+        .attr("fill", "none")
+        .attr("stroke", "green")
+        .attr("stroke-width", 2.5)
+
+
+
 }
 
 // At the beginning, I run the update function on the first dataset:
