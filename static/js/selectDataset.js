@@ -55,14 +55,14 @@ function handleMouseOver(id) {
     let circleID = "circle#" + id;
     let rectID = "rect#" + id;
 
-    svg_map.selectAll("circle").style("fill", "blue").attr("r", 4);
-    svg_map.select(circleID).attr("r", 10).style("fill", "red");
+    svg_map.selectAll("circle").style("fill", "#007bff").attr("r", 4);
+    svg_map.select(circleID).attr("r", 10).style("fill", "#fd6464");
 
-    svg_ppg_chart.selectAll(".bar").attr("fill", "blue");
-    svg_ppg_chart.select(rectID).attr("fill", "red");
+    svg_ppg_chart.selectAll(".bar").attr("fill", "#007bff");
+    svg_ppg_chart.select(rectID).attr("fill", "#fd6464");
 
-    svg_gpg_chart.selectAll(".bar").attr("fill", "blue");
-    svg_gpg_chart.select(rectID).attr("fill", "red");
+    svg_gpg_chart.selectAll(".bar").attr("fill", "#007bff");
+    svg_gpg_chart.select(rectID).attr("fill", "#fd6464");
 
     updateLinePlot(selectTeamData());
     updateLinePlot(selectTeamData(), "powerPlayPercentage", "#line_plot_percentage");

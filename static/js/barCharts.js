@@ -43,7 +43,7 @@ function drawBarchart() {
         .enter()
         .append("rect")
         .attr("class", "bar")
-        .attr("fill", "blue")
+        .attr("fill", "#007bff")
         .attr("id", d => d.abbreviation)
         .attr("x", d => xScale(d.name))
         .attr("y", d => yScale(d["teamStats"][0]["splits"][0]["stat"]["powerPlayGoals"]))
@@ -87,7 +87,7 @@ function drawBarchart2() {
 
 // Set the dimensions and margins of the chart
     let width = 500;
-    let height = 300;
+    let height = 260;
     let margin = {top: 20, right: 10, bottom: 30, left: 40};
 
 // Calculate the inner width and height
@@ -121,7 +121,7 @@ function drawBarchart2() {
         .enter()
         .append("rect")
         .attr("class", "bar")
-        .attr("fill", "blue")
+        .attr("fill", "#007bff")
         .attr("id", d => d.abbreviation)
         .attr("x", d => xScale(d.name))
         .attr("y", d => yScale(d["teamStats"][0]["splits"][0]["stat"]["goalsPerGame"]))

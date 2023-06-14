@@ -1,4 +1,6 @@
-var message =
+
+d3.select("#myButton").on("click", function () {
+    var message =
     `${previousTeam["name"]}
     Details:
     -gamesPlayed: ${previousTeam["teamStats"][0]["splits"][0]["stat"]["gamesPlayed"]}
@@ -7,6 +9,5 @@ var message =
     -ot: ${previousTeam["teamStats"][0]["splits"][0]["stat"]["ot"]}
     -pts: ${previousTeam["teamStats"][0]["splits"][0]["stat"]["pts"]}`;
 
-d3.select("#myButton").on("click", function () {
     alert(message);
 });

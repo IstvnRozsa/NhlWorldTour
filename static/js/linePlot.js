@@ -107,7 +107,7 @@ function updateLinePlot(data, feature = "powerPlayGoals", selected = "#line_plot
                 return y(d.teamStats[0].splits[0].stat[feature]);
             }))
         .attr("fill", "none")
-        .attr("stroke", "red")
+        .attr("stroke", "#fd6464")
         .attr("stroke-width", 2.5)
 
 

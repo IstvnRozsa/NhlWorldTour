@@ -44,7 +44,7 @@ function drawMap() {
                 return projection([d.longitude, d.latitude])[1];
             })
             .attr("r", 4)
-            .attr("fill", "blue")
+            .attr("fill", "#007bff")
             .attr("id", function (d) {
                 return d.abbreviation;
             })
