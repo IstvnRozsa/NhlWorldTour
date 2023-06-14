@@ -1,12 +1,12 @@
 
-let combobox_teams = d3.select('#combobox_teams');
+let combobox_stats = d3.select('#combobox_stats');
 
-combobox_teams.selectAll('option')
-    .data(teamNames)
+combobox_stats.selectAll('option')
+    .data(statistics)
     .enter()
     .append('option')
     .text(function (d) {
-        return d['name'];
+        return d;
     });
 function selectStatisticalData(objects, name) {
     let data = [];
@@ -21,7 +21,7 @@ function selectStatisticalData(objects, name) {
     // return null; // Return null if no match found
 }
 
-combobox_teams.on('change', function () {
+combobox_stats.on('change', function () {
     // Get the selected value
     let selectedStat = d3.select(this).property('value');
     selectedStatistic = selectStatisticalData(teams, selectedStat);
