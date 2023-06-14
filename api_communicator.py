@@ -11,7 +11,7 @@ path = 'data/'
 URL = "https://statsapi.web.nhl.com/api/v1/teams" + "?expand=team.stats"
 
 seasons = [
-    "&season=" + str(x) + str(x+1) for x in range(2014,2021)
+    "&season=" + str(x) + str(x + 1) for x in range(2014, 2021)
 ]
 # defining a params dict for the parameters to be sent to the API
 PARAMS = {}
@@ -23,13 +23,14 @@ def get_data(force_fetch=False):
     # sending get request and saving the response as response object
     res = {"seasons": []}
     teams = []
+    teamStats = []
     location_cach = {}
     for season in seasons:
         print(season)
         try:
             if force_fetch:
                 raise Exception
-            with open(path+season + ".json", 'r') as f:
+            with open(path + season + ".json", 'r') as f:
                 print(f"read from file {f}")
                 sdata = f.read()
                 data = json.loads(sdata)
@@ -41,7 +42,13 @@ def get_data(force_fetch=False):
                     years = year.split('-')
                     item.update({"from": int(years[0])})
                     item.update({"to": int(years[1])})
-                teams.append(ts)
+                    teamSumm = {
+                        "id": item["id"],
+                        "name": item["name"],
+                        "abbreviation": item["abbreviation"]
+                    }
+                    teams.append(teamSumm)
+                teamStats.append(ts)
                 res['seasons'].append(data)
         except:
             print("fetch from api")
@@ -64,17 +71,30 @@ def get_data(force_fetch=False):
                 team["longitude"] = location.longitude
                 team["latitude"] = location.latitude
 
-            with open(path+season + ".json", 'w+') as f:
+            with open(path + season + ".json", 'w+') as f:
                 print("write season to file")
                 sdata = json.dumps(data, indent=4)
                 f.write(sdata)
             res['seasons'].append(data)
-    teams = flatten(teams)
-    with open(path+"teams.json", 'w+') as f:
+    teamStats = flatten(teamStats)
+    with open(path + "teams.json", 'w+') as f:
         print("write teams")
-        sdata = json.dumps(teams)
+        sdata = json.dumps(teamStats)
         f.write(sdata)
-    return res, teams
+
+    with open(path + "teamsSummary.json", 'w+') as f:
+        print("write teams summary")
+        print(teams)
+        new_l = []
+        seen = set()
+        for d in teams:
+            t = tuple(d.items())
+            if t not in seen:
+                seen.add(t)
+                new_l.append(d)
+        sdata = json.dumps(new_l)
+        f.write(sdata)
+    return res, teamStats
 
 
 if __name__ == "__main__":
