@@ -65,7 +65,7 @@ function updateLinePlot(data, feature = "powerPlayGoals", selected = "#line_plot
         return d["from"];
     })]);
     linePlotSvg.selectAll(".myXaxis").transition()
-        .duration(3000)
+        .duration(500)
         .call(xAxis);
 
     // create the Y axis
@@ -76,7 +76,7 @@ function updateLinePlot(data, feature = "powerPlayGoals", selected = "#line_plot
     })]);
     linePlotSvg.selectAll(".myYaxis")
         .transition()
-        .duration(3000)
+        .duration(500)
         .call(yAxis);
 
     // Create an update selection: bind to the new data
@@ -90,7 +90,7 @@ function updateLinePlot(data, feature = "powerPlayGoals", selected = "#line_plot
         .join("path")
         .attr("class", "lineTest")
         .transition()
-        .duration(3000)
+        .duration(500)
         .attr("d", d3.line()
             .x(function (d) {
                 return x(d["from"]);
@@ -114,7 +114,7 @@ function updateLinePlot(data, feature = "powerPlayGoals", selected = "#line_plot
         .join("path")
         .attr("class", "lineTest2")
         .transition()
-        .duration(3000)
+        .duration(500)
         .attr("d", d3.line()
             .x(function (d) {
                 return x(d["from"]);
