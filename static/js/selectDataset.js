@@ -51,6 +51,7 @@ function handleMouseOver(id) {
     previousTeamId = id;
 
     d3.select("#selected_team").text(selectedTeam.name);
+    d3.select("#team1list").text(selectedTeam.name);
 
     let svg_map = d3.select("#teams_map");
     let svg_ppg_chart = d3.select("#pp_goals_chart");

@@ -9,6 +9,7 @@ combobox_teams.selectAll('option')
     });
 
 let previousSelectedTeamFromCB = "New Jersey Devils";
+d3.select("#team2list").text(previousSelectedTeamFromCB);
 
 function selectTeamData() {
     let dataTeam1 = [];
@@ -28,6 +29,7 @@ function selectTeamData() {
 combobox_teams.on('change', function () {
     // Get the selected value
     previousSelectedTeamFromCB = d3.select(this).property('value');
+    d3.select("#team2list").text(previousSelectedTeamFromCB);
     let selectedTeams = selectTeamData();
 
     updateLinePlot(selectedTeams);

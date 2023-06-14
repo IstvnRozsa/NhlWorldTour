@@ -1,3 +1,7 @@
+.custom-body {
+  margin-top: 50px;
+}
+
 #myDiv {
   position: relative;
   width: 400px; /* Adjust the width and height as per your requirements */

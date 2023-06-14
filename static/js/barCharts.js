@@ -9,7 +9,7 @@ function drawBarchart() {
 
 // Set the dimensions and margins of the chart
     let width = 500;
-    let height = 300;
+    let height = 260;
     let margin = {top: 20, right: 0, bottom: 30, left: 40};
 
 // Calculate the inner width and height

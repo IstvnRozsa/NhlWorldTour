@@ -11,9 +11,11 @@
 
 {% block body %}
 
-
     <div class="container-fluid">
-        <div class="row">
+    <h1>Overview</h1>
+    </div>
+    <div class="container-fluid">
+        <div class="row" style="margin-top: 5px">
             <div class="col-3">
                 <h2 id="selected_team">NHL Teams</h2>
             </div>
@@ -39,33 +41,40 @@
             </div>
         </div>
 
+        <div class="border-top mb-4" style="margin-top: 5px"></div>
 
         <div class="row">
-            <div class="col-3">
-                <h3>Line Plot</h3>
+            <div class="col-2">
+                <h1>Powerplay stats</h1>
+            </div>
+            <div class="col-2">
+                <ul>
+                    <li id="team1list" style="color: red">First team</li>
+                    <li id="team2list" style="color: green">Second Team</li>
+                </ul>
             </div>
             <div class="col-2">
                 <select id="combobox_teams" class="selectpicker"></select>
             </div>
-{#            <div class="col-5">#}
-{#                <select id="combobox_stats" class="selectpicker"></select>#}
-{#            </div>#}
+            {#            <div class="col-5">#}
+            {#                <select id="combobox_stats" class="selectpicker"></select>#}
+            {#            </div>#}
         </div>
         <div class="row">
             <div class="col">
-                <h3>Goals</h3>
+                <h4>Powerplay Goals</h4>
                 <div id="line_plot_goals"></div>
             </div>
             <div class="col">
-                <h3>Percentage</h3>
+                <h4>Powerplay %</h4>
                 <div id="line_plot_percentage"></div>
             </div>
             <div class="col">
-                <h3>Against</h3>
+                <h4>Powerplay Goals Against</h4>
                 <div id="line_plot_against"></div>
             </div>
             <div class="col">
-                <h3>Opporturnities</h3>
+                <h4>Powerplay Opportunities</h4>
                 <div id="line_plot_opportunities"></div>
             </div>
         </div>
