@@ -37,10 +37,10 @@ def get_data(force_fetch=False):
                 ts = data['teams']
                 year = data['year']
                 for item in ts:
-                    item.update({"year": year})
-                # for t in teams:
-                #     t['year'] = data['year']
-                #     teams.append(t)
+                    item.update({"season": year})
+                    years = year.split('-')
+                    item.update({"from": int(years[0])})
+                    item.update({"to": int(years[1])})
                 teams.append(ts)
                 res['seasons'].append(data)
         except:
