@@ -4,6 +4,11 @@ function drawLineChart() {
 
 // Create a function that takes a dataset as input and update the plot:
 function updateLinePlot(data) {
+    if (data == null) {
+        return;
+    }
+    team1 = data[0];
+    team2 = data[1];
     margin = {top: 20, right: 20, bottom: 60, left: 60};
     width = 500 - margin.left - margin.right;
     height = 400 - margin.top - margin.bottom;
@@ -29,22 +34,23 @@ function updateLinePlot(data) {
         .attr("class", "myYaxis")
 
     // Create the X axis:
+    console.log("data for linePlot are: ");
     console.log(data);
 
-    x.domain([d3.min(data, function (d) {
-        return d.from;
-    }), d3.max(data, function (d) {
-        return d.from;
+    x.domain([d3.min(team1, function (d) {
+        return d["from"];
+    }), d3.max(team1, function (d) {
+        return d["from"];
     })]);
     linePlotSvg.selectAll(".myXaxis").transition()
         .duration(3000)
         .call(xAxis);
 
     // create the Y axis
-    y.domain([d3.min(data, function (d) {
-        return d.feature;
-    }), d3.max(data, function (d) {
-        return d.feature
+    y.domain([d3.min(team1, function (d) {
+        return 0;
+    }), d3.max(team1, function (d) {
+        return d["powerPlayGoals"];
     })]);
     linePlotSvg.selectAll(".myYaxis")
         .transition()
@@ -53,7 +59,7 @@ function updateLinePlot(data) {
 
     // Create an update selection: bind to the new data
     const u = linePlotSvg.selectAll(".lineTest")
-        .data([data], function (d) {
+        .data([team1], function (d) {
             return d.from;
         });
 
@@ -68,7 +74,7 @@ function updateLinePlot(data) {
                 return x(d.from);
             })
             .y(function (d) {
-                return y(d.feature);
+                return y(d["powerPlayGoals"]);
             }))
         .attr("fill", "none")
         .attr("stroke", "steelblue")
@@ -76,4 +82,4 @@ function updateLinePlot(data) {
 }
 
 // At the beginning, I run the update function on the first dataset:
-updateLinePlot(teams);
+updateLinePlot(null);
