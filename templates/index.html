@@ -53,12 +53,14 @@
     <script>
         let seasons = {{ seasons | safe }};
         let teams = {{ teams | safe }};
+        let teamNames = {{ teamNames || safe }};
     </script>
     <script src="../static/js/selectDataset.js" type="text/javascript"></script>
     <script src="../static/js/maps.js" type="text/javascript"></script>
     <script src="../static/js/barCharts.js" type="text/javascript"></script>
     <script src="../static/js/linePlot.js" type="text/javascript"></script>
     <script src="../static/js/alert.js" type="text/javascript"></script>
+    <script src="../static/js/selectTeam.js" type="text/javascript"></script>
 
 
 

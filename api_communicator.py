@@ -3,7 +3,8 @@ import requests
 import os.path
 import json
 from geopy.geocoders import Nominatim
-#https://gitlab.com/dword4/nhlapi
+
+# https://gitlab.com/dword4/nhlapi
 # cached file:
 path = 'data/'
 
@@ -16,8 +17,10 @@ seasons = [
 # defining a params dict for the parameters to be sent to the API
 PARAMS = {}
 
+
 def flatten(l):
     return [item for sublist in l for item in sublist]
+
 
 def get_data(force_fetch=False):
     # sending get request and saving the response as response object
@@ -82,19 +85,18 @@ def get_data(force_fetch=False):
         sdata = json.dumps(teamStats)
         f.write(sdata)
 
+    teamsWithoutDupl = []
     with open(path + "teamsSummary.json", 'w+') as f:
         print("write teams summary")
-        print(teams)
-        new_l = []
         seen = set()
         for d in teams:
             t = tuple(d.items())
             if t not in seen:
                 seen.add(t)
-                new_l.append(d)
-        sdata = json.dumps(new_l)
+                teamsWithoutDupl.append(d)
+        sdata = json.dumps(teamsWithoutDupl)
         f.write(sdata)
-    return res, teamStats
+    return res, teamStats, teamsWithoutDupl
 
 
 if __name__ == "__main__":

@@ -10,8 +10,9 @@ app.config['TEMPLATES_AUTO_RELOAD'] = True
 def hello_world():  # put application's code here
     res = get_data()
     seasons = json.dumps(res[0])
-    teams = json.dumps(res[1])
-    return render_template('index.html', seasons=seasons, teams=teams)
+    teamsStatistics = json.dumps(res[1])
+    teams = json.dumps(res[2])
+    return render_template('index.html', seasons=seasons, teams=teamsStatistics, teamNames=teams)
 
 
 if __name__ == '__main__':
