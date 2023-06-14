@@ -16,9 +16,13 @@ seasons = [
 # defining a params dict for the parameters to be sent to the API
 PARAMS = {}
 
+def flatten(l):
+    return [item for sublist in l for item in sublist]
+
 def get_data(force_fetch=False):
     # sending get request and saving the response as response object
     res = {"seasons": []}
+    teams = []
     location_cach = {}
     for season in seasons:
         print(season)
@@ -30,6 +34,14 @@ def get_data(force_fetch=False):
                 sdata = f.read()
                 data = json.loads(sdata)
                 data['year'] = season[8:12] + '-' + season[12:16]
+                ts = data['teams']
+                year = data['year']
+                for item in ts:
+                    item.update({"season": year})
+                    years = year.split('-')
+                    item.update({"from": int(years[0])})
+                    item.update({"to": int(years[1])})
+                teams.append(ts)
                 res['seasons'].append(data)
         except:
             print("fetch from api")
@@ -57,7 +69,12 @@ def get_data(force_fetch=False):
                 sdata = json.dumps(data, indent=4)
                 f.write(sdata)
             res['seasons'].append(data)
-    return res
+    teams = flatten(teams)
+    with open(path+"teams.json", 'w+') as f:
+        print("write teams")
+        sdata = json.dumps(teams)
+        f.write(sdata)
+    return res, teams
 
 
 if __name__ == "__main__":

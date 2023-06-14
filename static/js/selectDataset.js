@@ -5,10 +5,10 @@ statistics = Object.keys(selectedSeason.teams[0].teamStats[0].splits[0].stat);
 
 // Do something with the selected value
 console.log('Selected season:', selectedSeason);
-console.log('Stats:', statistics);
 
 // Get a reference to the combobox element
 let combobox = d3.select('#combobox');
+let combobox_stats = d3.select('#combobox_stats');
 
 // Populate the combobox with values from the list
 combobox.selectAll('option')
@@ -17,6 +17,14 @@ combobox.selectAll('option')
     .append('option')
     .text(function (d) {
         return d.year;
+    });
+
+combobox_stats.selectAll('option')
+    .data(statistics)
+    .enter()
+    .append('option')
+    .text(function (d) {
+        return d;
     });
 
 function selectSeasonByYear(objects, year) {
