@@ -15,9 +15,9 @@ function selectTeamData(objects, name) {
         if (objects[i].name === name) {
             console.log("obj: ");
             console.log(objects[i]);
-            dataTeam2.push(objects[i].teamStats[0].splits[0].stat);
+            dataTeam2.push(objects[i]);
         } else if (objects[i].abbreviation === previousTeamId) {
-            dataTeam1.push(objects[i].teamStats[0].splits[0].stat);
+            dataTeam1.push(objects[i]);
         }
     }
     console.log(previousTeamId);
@@ -30,6 +30,8 @@ function selectTeamData(objects, name) {
 combobox_teams.on('change', function () {
     // Get the selected value
     let selected = d3.select(this).property('value');
+    console.log("XXX: ");
+    console.log(teams);
     let selectedTeams = selectTeamData(teams, selected);
     console.log("stats" + selected + ": " + selectedTeams[0]);
     console.log(selectedTeams[0])

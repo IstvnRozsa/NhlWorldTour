@@ -9,6 +9,8 @@ function updateLinePlot(data) {
     }
     team1 = data[0];
     team2 = data[1];
+    console.log("data for linePlot are: ");
+    console.log(team1);
     margin = {top: 20, right: 20, bottom: 60, left: 60};
     width = 500 - margin.left - margin.right;
     height = 400 - margin.top - margin.bottom;
@@ -34,8 +36,7 @@ function updateLinePlot(data) {
         .attr("class", "myYaxis")
 
     // Create the X axis:
-    console.log("data for linePlot are: ");
-    console.log(data);
+
 
     x.domain([d3.min(team1, function (d) {
         return d["from"];
@@ -50,7 +51,7 @@ function updateLinePlot(data) {
     y.domain([d3.min(team1, function (d) {
         return 0;
     }), d3.max(team1, function (d) {
-        return d["powerPlayGoals"];
+        return d.teamStats[0].splits[0].stat["powerPlayGoals"];
     })]);
     linePlotSvg.selectAll(".myYaxis")
         .transition()
@@ -60,7 +61,7 @@ function updateLinePlot(data) {
     // Create an update selection: bind to the new data
     const u = linePlotSvg.selectAll(".lineTest")
         .data([team1], function (d) {
-            return d.from;
+            return d["from"];
         });
 
     // Updata the line
@@ -71,10 +72,10 @@ function updateLinePlot(data) {
         .duration(3000)
         .attr("d", d3.line()
             .x(function (d) {
-                return x(d.from);
+                return x(d["from"]);
             })
             .y(function (d) {
-                return y(d["powerPlayGoals"]);
+                return y(d.teamStats[0].splits[0].stat["powerPlayGoals"]);
             }))
         .attr("fill", "none")
         .attr("stroke", "steelblue")
