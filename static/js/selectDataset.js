@@ -38,8 +38,8 @@ combobox.on('change', function () {
 
 var previousTeamId = "NJD";
 var previousTeam = selectedSeason["teams"].find(function (obj) {
-        return obj.abbreviation === previousTeamId;
-    });
+    return obj.abbreviation === previousTeamId;
+});
 
 console.log(previousTeam);
 
