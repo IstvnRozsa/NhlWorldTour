@@ -1,6 +1,5 @@
 //Default value = the first year
 selectedSeason = seasons["seasons"][0];
-
 statistics = Object.keys(selectedSeason.teams[0].teamStats[0].splits[0].stat);
 
 // Do something with the selected value
@@ -8,7 +7,6 @@ console.log('Selected season:', selectedSeason);
 
 // Get a reference to the combobox element
 let combobox = d3.select('#combobox');
-let combobox_stats = d3.select('#combobox_stats');
 
 // Populate the combobox with values from the list
 combobox.selectAll('option')
@@ -17,14 +15,6 @@ combobox.selectAll('option')
     .append('option')
     .text(function (d) {
         return d.year;
-    });
-
-combobox_stats.selectAll('option')
-    .data(statistics)
-    .enter()
-    .append('option')
-    .text(function (d) {
-        return d;
     });
 
 function selectSeasonByYear(objects, year) {
@@ -47,6 +37,7 @@ combobox.on('change', function () {
     drawBarchart2();
 });
 
+
 var previousTeamId = "NJD";
 var previousTeam = selectedSeason["teams"].find(function (obj) {
         return obj.abbreviation === previousTeamId;
@@ -54,12 +45,12 @@ var previousTeam = selectedSeason["teams"].find(function (obj) {
 
 console.log(previousTeam);
 
-
 function handleMouseOver(id) {
     var selectedTeam = selectedSeason["teams"].find(function (obj) {
         return obj.abbreviation === id;
     });
     previousTeam = selectedTeam;
+    previousTeamId = id;
     console.log(previousTeam);
 
     d3.select("#selected_team").text(selectedTeam.name);

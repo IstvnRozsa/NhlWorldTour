@@ -8,20 +8,21 @@ function updateLinePlot(data) {
     width = 500 - margin.left - margin.right;
     height = 400 - margin.top - margin.bottom;
     console.log("draw LinePlot");
+
     linePlotSvg = d3.select("#line_plot")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
-    // Initialise a X axis:
+    // Initialise X axis:
     const x = d3.scaleLinear().range([0, width]);
     const xAxis = d3.axisBottom().scale(x);
     linePlotSvg.append("g")
         .attr("transform", `translate(0, ${height})`)
         .attr("class", "myXaxis")
 
-// Initialize an Y axis
+    // Initialize Y axis
     const y = d3.scaleLinear().range([height, 0]);
     const yAxis = d3.axisLeft().scale(y);
     linePlotSvg.append("g")
@@ -29,11 +30,11 @@ function updateLinePlot(data) {
 
     // Create the X axis:
     console.log(data);
+
     x.domain([d3.min(data, function (d) {
-        console.log("year" + d.year.split("-").at(0));
-        return d.year.split("-").at(0)
+        return d.from;
     }), d3.max(data, function (d) {
-        return d.year.split("-").at(0)
+        return d.from;
     })]);
     linePlotSvg.selectAll(".myXaxis").transition()
         .duration(3000)
@@ -41,7 +42,7 @@ function updateLinePlot(data) {
 
     // create the Y axis
     y.domain([d3.min(data, function (d) {
-        return d.feature
+        return d.feature;
     }), d3.max(data, function (d) {
         return d.feature
     })]);
@@ -50,10 +51,10 @@ function updateLinePlot(data) {
         .duration(3000)
         .call(yAxis);
 
-    // Create a update selection: bind to the new data
+    // Create an update selection: bind to the new data
     const u = linePlotSvg.selectAll(".lineTest")
         .data([data], function (d) {
-            return d.year.split("-").at(0)
+            return d.from;
         });
 
     // Updata the line
@@ -64,7 +65,7 @@ function updateLinePlot(data) {
         .duration(3000)
         .attr("d", d3.line()
             .x(function (d) {
-                return x(d.year);
+                return x(d.from);
             })
             .y(function (d) {
                 return y(d.feature);
